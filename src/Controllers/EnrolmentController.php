@@ -27,12 +27,19 @@ class EnrolmentController extends BaseController
 
     public function enroll()
     {
+        // Capture data from the form
         $course_code = $_POST['course_code'];
         $student_code = $_POST['student_code'];
-        $enrollment_date = $_POST['enrollment_date'];
-        // Enroll Student to course
-        // write code here
-        
+        $enrollment_date = $_POST['enrollment_date']; 
+
+        // Create an instance of the CourseEnrolment model
+        $enrollment = new CourseEnrolment();
+
+        // Enroll the student in the course (inserting into the database)
+        $enrollment->enroll($student_code, $course_code);
+
+        // Redirect to the course page after successful enrollment
         header("Location: /courses/{$course_code}");
+        exit;  // Ensure no further code is executed
     }
 }

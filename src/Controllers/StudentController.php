@@ -9,16 +9,10 @@ class StudentController extends BaseController
 {
     public function list()
     {
-        $obj = new Student();
-        $students = $obj->all();
-
-        $template = 'students';
-        $data = [
-            'items' => $students
-        ];
-
-        $output = $this->render($template, $data);
-
-        return $output;
+        $studentModel = new Student();
+        $students = $studentModel->all(); // Fetch all students
+        
+        // Render the Mustache view and pass the students data
+        echo $this->render('students.mustache', ['students' => $students]);
     }
 }

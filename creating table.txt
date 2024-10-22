@@ -1,0 +1,30 @@
+-- Creating Students Table
+CREATE TABLE Students (
+    id INT PRIMARY KEY,
+    student_code VARCHAR(20) UNIQUE NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    date_of_birth DATE NOT NULL,
+    sex ENUM('Male', 'Female') NOT NULL
+);
+
+-- Creating Courses Table
+CREATE TABLE Courses (
+    id INT PRIMARY KEY,
+    course_name VARCHAR(100) NOT NULL,
+    course_code VARCHAR(10) UNIQUE NOT NULL,
+    description TEXT,
+    credits INT NOT NULL
+);
+
+-- Creating Course Enrollments Table
+CREATE TABLE Course_Enrolments (
+    id INT PRIMARY KEY,
+    student_code VARCHAR(20),
+    course_code VARCHAR(10),
+    enrolment_date DATE NOT NULL,
+    grade VARCHAR(2),
+    FOREIGN KEY (student_code) REFERENCES Students(student_code),
+    FOREIGN KEY (course_code) REFERENCES Courses(course_code)
+);
